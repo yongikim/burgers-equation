@@ -4,4 +4,3 @@
   "deno.unstable": true,
   "prettier.disableLanguages": ["typescript", "javascript"]
 }
-
