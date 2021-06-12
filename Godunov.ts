@@ -1,4 +1,5 @@
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.98.0/testing/asserts.ts";
+import { ensureDirSync } from "https://deno.land/std@0.98.0/fs/mod.ts";
 
 import { Cell } from "./Cell.ts";
 import { simpsonIntegration } from "./Utils.ts";
@@ -30,13 +31,15 @@ export class Godunov {
   }
 
   solve() {
-    this.writeCellValuesToFile("./initValues.txt");
+    ensureDirSync("./data");
+
+    this.writeCellValuesToFile("./data/initValues.txt");
 
     for (let n = 0; n * DT < T_END; n++) {
       this.updateCells();
     }
 
-    this.writeCellValuesToFile("./finalValues.txt");
+    this.writeCellValuesToFile("./data/finalValues.txt");
   }
 
   private createCells(
